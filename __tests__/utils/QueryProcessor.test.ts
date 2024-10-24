@@ -40,13 +40,23 @@ describe("QueryProcessor", () => {
             "hakaabi"
           ));
     });
-    test('should answer 69', () => {
+    test('should answer the sum of two numbers from the query', () => {
         const query = "What is 26 plus 43?";
-        const response: string = QueryProcessor(query);
-        expect(response).toBe((
-            "69"
-          ));
-    });
+        
+        // Extract the numbers from the query using a regex
+        const numbers = query.match(/\d+/g)?.map(Number);
+        
+        if (numbers && numbers.length === 2) {
+            const expectedSum = numbers[0] + numbers[1]; // Dynamically calculate the sum
+            
+            const response: string = QueryProcessor(query); // Call your function
+            
+            // Compare the response to the dynamically calculated expected sum
+            expect(response).toBe(expectedSum.toString());
+        } else {
+            throw new Error('Failed to extract numbers from the query.');
+        }
+    });    
     
 });
 

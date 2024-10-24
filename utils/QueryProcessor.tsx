@@ -15,8 +15,16 @@ export default function QueryProcessor(query: string): string {
   if (query.toLocaleLowerCase().includes("name")) {
     return ( "hakaabi" );
   }
-  if (query.toLocaleLowerCase().includes("26 plus 43")) {
-    return ( "69" );
-  }
+  if (query.toLocaleLowerCase().includes("plus")) {
+    // Extract the numbers from the query
+    const numbers = query.match(/\d+/g)?.map(Number);
+    
+    // Check if we have exactly two numbers
+    if (numbers && numbers.length === 2) {
+        const sum = numbers[0] + numbers[1];
+        return sum.toString(); // Convert the sum to a string and return it
+    }
+}
+
   return "";
 }
