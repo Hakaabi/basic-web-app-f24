@@ -91,6 +91,21 @@ if (query.toLocaleLowerCase().includes("are primes")) {
   // Return the result as a string or "None" if no primes found
   return primeNumbers?.length ? primeNumbers.join(", ") : "None";
 }
+if (query.toLocaleLowerCase().includes("to the power of")) {
+  // Extract the numbers from the query
+  const numbers = query.match(/\d+/g)?.map(Number);
+  
+  // Check if we have exactly two numbers
+  if (numbers && numbers.length === 2) {
+      const base = numbers[0];
+      const exponent = numbers[1];
+      const result = Math.pow(base, exponent); // Calculate the power
+      return result.toString(); // Convert the result to a string and return it
+  } else {
+      throw new Error('Failed to extract base and exponent from the query.');
+  }
+}
+
 
   return "";
 }

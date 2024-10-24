@@ -154,6 +154,26 @@ describe("QueryProcessor", () => {
         
         expect(response).toBe(expectedResponse);
     });
+    test('should answer the power calculation from the query', () => {
+        const query = "What is 42 to the power of 34?";
         
+        // Extract the numbers from the query
+        const numbers = query.match(/\d+/g)?.map(Number);
+        
+        // Check if we have exactly two numbers
+        if (numbers && numbers.length === 2) {
+            const base = numbers[0];
+            const exponent = numbers[1];
+            const expectedResult = Math.pow(base, exponent); // Dynamically calculate the power
+            
+            const response: string = QueryProcessor(query); // Call your function
+            
+            // Compare the response to the dynamically calculated expected result
+            expect(response).toBe(expectedResult.toString());
+        } else {
+            throw new Error('Failed to extract base and exponent from the query.');
+        }
+    });
+            
 });
 
