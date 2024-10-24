@@ -72,6 +72,25 @@ if (query.toLocaleLowerCase().includes("minus")) {
       throw new Error('Failed to extract two numbers from the query.');
   }
 }
+if (query.toLocaleLowerCase().includes("are primes")) {
+  // Extract the numbers from the query
+  const numbers = query.match(/\d+/g)?.map(Number);
+  
+  // Function to check if a number is prime
+  const isPrime = (num: number): boolean => {
+      if (num <= 1) return false; // 0 and 1 are not prime
+      for (let i = 2; i <= Math.sqrt(num); i++) {
+          if (num % i === 0) return false; // Found a divisor
+      }
+      return true; // It's prime
+  };
+
+  // Filter the prime numbers
+  const primeNumbers = numbers?.filter(isPrime);
+  
+  // Return the result as a string or "None" if no primes found
+  return primeNumbers?.length ? primeNumbers.join(", ") : "None";
+}
 
   return "";
 }

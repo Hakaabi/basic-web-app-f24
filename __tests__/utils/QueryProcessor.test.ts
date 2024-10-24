@@ -129,6 +129,31 @@ describe("QueryProcessor", () => {
             throw new Error('Failed to extract two numbers from the query.');
         }
     });
+    test('should identify prime numbers from the query', () => {
+        const query = "Which of the following numbers are primes: 13, 46, 16, 19, 82?";
+        
+        // Extract the numbers from the query
+        const numbers = query.match(/\d+/g)?.map(Number);
+        
+        // Function to check if a number is prime
+        const isPrime = (num: number): boolean => {
+            if (num <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(num); i++) {
+                if (num % i === 0) return false;
+            }
+            return true;
+        };
     
+        // Expected primes from the list
+        const expectedPrimes = numbers?.filter(isPrime);
+        
+        const response: string = QueryProcessor(query); // Call your function
+        
+        // Compare the response to the expected primes as a comma-separated string
+        const expectedResponse = expectedPrimes?.length ? expectedPrimes.join(", ") : "None";
+        
+        expect(response).toBe(expectedResponse);
+    });
+        
 });
 
