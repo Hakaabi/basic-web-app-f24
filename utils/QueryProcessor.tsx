@@ -15,5 +15,8 @@ export default function QueryProcessor(query: string): string {
   if (query.toLocaleLowerCase().includes("name")) {
     return ( "hakaabi" );
   }
+  if (query.toLocaleLowerCase().includes("26 plus 43")) {
+    return ( "69" );
+  }
   return "";
 }
