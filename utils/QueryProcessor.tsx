@@ -60,6 +60,18 @@ if (query.toLocaleLowerCase().includes("multiplied by")) {
       throw new Error('Failed to extract two numbers from the query.');
   }
 }
+if (query.toLocaleLowerCase().includes("minus")) {
+  // Extract the numbers from the query
+  const numbers = query.match(/\d+/g)?.map(Number);
+  
+  // Check if we have exactly two numbers
+  if (numbers && numbers.length === 2) {
+      const difference = numbers[0] - numbers[1]; // Subtract the second number from the first
+      return difference.toString(); // Convert the difference to a string and return it
+  } else {
+      throw new Error('Failed to extract two numbers from the query.');
+  }
+}
 
   return "";
 }

@@ -111,6 +111,24 @@ describe("QueryProcessor", () => {
             throw new Error('Failed to extract two numbers from the query.');
         }
     });
+    test('should answer the subtraction of two numbers from the query', () => {
+        const query = "What is 11 minus 72?";
         
+        // Extract the numbers from the query using a regex
+        const numbers = query.match(/\d+/g)?.map(Number);
+        
+        // Check if we have exactly two numbers
+        if (numbers && numbers.length === 2) {
+            const expectedDifference = numbers[0] - numbers[1]; // Dynamically calculate the difference
+            
+            const response: string = QueryProcessor(query); // Call your function
+            
+            // Compare the response to the dynamically calculated expected difference
+            expect(response).toBe(expectedDifference.toString());
+        } else {
+            throw new Error('Failed to extract two numbers from the query.');
+        }
+    });
+    
 });
 
