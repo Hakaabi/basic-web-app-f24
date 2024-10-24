@@ -12,5 +12,8 @@ export default function QueryProcessor(query: string): string {
     //TODO update the corresponding test case in __tests__
     return ( "hakaabi" );
   }
+  if (query.toLocaleLowerCase().includes("name")) {
+    return ( "hakaabi" );
+  }
   return "";
 }
