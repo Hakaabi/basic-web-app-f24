@@ -74,7 +74,25 @@ describe("QueryProcessor", () => {
             throw new Error('Failed to extract numbers from the query.');
         }
     });
-      
+    test('should find numbers that are both square and cube', () => {
+        const query = "Which of the following numbers is both a square and a cube: 837, 1743, 993, 1173, 529, 1, 729?";
+        
+        // Extract the numbers from the query
+        const numbers = query.match(/\d+/g)?.map(Number);
+        
+        // Expected results: Only numbers that are perfect sixth powers
+        const expectedNumbers = numbers?.filter(num => {
+            const root = Math.pow(num, 1/6);
+            return Number.isInteger(root);
+        });
     
+        const response: string = QueryProcessor(query); // Call your function
+    
+        // Compare the response to the expected results as a comma-separated string
+        const expectedResponse = expectedNumbers?.length ? expectedNumbers.join(", ") : "None";
+        
+        expect(response).toBe(expectedResponse);
+    });    
+          
 });
 

@@ -35,6 +35,19 @@ if (query.toLocaleLowerCase().includes("largest")) {
       return largest.toString(); // Convert it to a string and return it
   }
 }
+if (query.toLocaleLowerCase().includes("both a square and a cube")) {
+  // Extract the numbers from the query
+  const numbers = query.match(/\d+/g)?.map(Number);
+  
+  // Check if each number is both a square and a cube (i.e., a perfect sixth power)
+  const result = numbers?.filter(num => {
+      const root = Math.pow(num, 1/6); // Take the sixth root
+      return Number.isInteger(root);   // Check if it's an integer
+  });
+
+  // Return the result as a string or "None" if no such numbers
+  return result?.length ? result.join(", ") : "None";
+}
 
   return "";
 }
