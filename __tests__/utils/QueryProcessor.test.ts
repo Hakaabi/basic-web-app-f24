@@ -40,5 +40,13 @@ describe("QueryProcessor", () => {
             "hakaabi"
           ));
     });
+    test('should answer 69', () => {
+        const query = "What is 26 plus 43?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+            "69"
+          ));
+    });
+    
 });
 
