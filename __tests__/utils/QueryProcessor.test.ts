@@ -46,8 +46,8 @@ describe("QueryProcessor", () => {
         // Extract the numbers from the query using a regex
         const numbers = query.match(/\d+/g)?.map(Number);
         
-        if (numbers && numbers.length === 2) {
-            const expectedSum = numbers[0] + numbers[1]; // Dynamically calculate the sum
+        if (numbers && numbers.length >= 2) {
+            const expectedSum = numbers.reduce((acc, num) => acc + num, 0); // Dynamically calculate the sum
             
             const response: string = QueryProcessor(query); // Call your function
             
