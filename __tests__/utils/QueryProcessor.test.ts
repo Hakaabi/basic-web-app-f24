@@ -56,7 +56,25 @@ describe("QueryProcessor", () => {
         } else {
             throw new Error('Failed to extract numbers from the query.');
         }
-    });    
+    });  
+    test('should find the largest number from the query', () => {
+        const query = "Which of the following numbers is the largest: 17, 60, 5?";
+        
+        // Extract the numbers from the query using a regex
+        const numbers = query.match(/\d+/g)?.map(Number);
+        
+        if (numbers && numbers.length > 0) {
+            const largestNumber = Math.max(...numbers); // Find the largest number
+            
+            const response: string = QueryProcessor(query); // Call your function
+            
+            // Compare the response to the largest number as a string
+            expect(response).toBe(largestNumber.toString());
+        } else {
+            throw new Error('Failed to extract numbers from the query.');
+        }
+    });
+      
     
 });
 

@@ -25,6 +25,16 @@ export default function QueryProcessor(query: string): string {
         return sum.toString(); // Convert the sum to a string and return it
     }
 }
+if (query.toLocaleLowerCase().includes("largest")) {
+  // Extract the numbers from the query
+  const numbers = query.match(/\d+/g)?.map(Number);
+  
+  // Check if we have numbers to compare
+  if (numbers && numbers.length > 0) {
+      const largest = Math.max(...numbers); // Find the largest number
+      return largest.toString(); // Convert it to a string and return it
+  }
+}
 
   return "";
 }
