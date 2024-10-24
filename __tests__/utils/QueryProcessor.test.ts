@@ -93,6 +93,24 @@ describe("QueryProcessor", () => {
         
         expect(response).toBe(expectedResponse);
     });    
-          
+    test('should answer the multiplication of two numbers from the query', () => {
+        const query = "What is 83 multiplied by 45?";
+        
+        // Extract the numbers from the query using a regex
+        const numbers = query.match(/\d+/g)?.map(Number);
+        
+        // Check if we have exactly two numbers
+        if (numbers && numbers.length === 2) {
+            const expectedProduct = numbers[0] * numbers[1]; // Dynamically calculate the product
+            
+            const response: string = QueryProcessor(query); // Call your function
+            
+            // Compare the response to the dynamically calculated expected product
+            expect(response).toBe(expectedProduct.toString());
+        } else {
+            throw new Error('Failed to extract two numbers from the query.');
+        }
+    });
+        
 });
 

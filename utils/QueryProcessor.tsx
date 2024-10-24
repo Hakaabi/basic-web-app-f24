@@ -48,6 +48,18 @@ if (query.toLocaleLowerCase().includes("both a square and a cube")) {
   // Return the result as a string or "None" if no such numbers
   return result?.length ? result.join(", ") : "None";
 }
+if (query.toLocaleLowerCase().includes("multiplied by")) {
+  // Extract the numbers from the query
+  const numbers = query.match(/\d+/g)?.map(Number);
+  
+  // Check if we have exactly two numbers
+  if (numbers && numbers.length === 2) {
+      const product = numbers[0] * numbers[1]; // Multiply the two numbers
+      return product.toString(); // Convert the product to a string and return it
+  } else {
+      throw new Error('Failed to extract two numbers from the query.');
+  }
+}
 
   return "";
 }
