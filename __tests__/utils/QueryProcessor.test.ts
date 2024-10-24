@@ -26,4 +26,19 @@ describe("QueryProcessor", () => {
             "hakaabi"
           ));
     });
+    test('should return my andrew id', () => {
+        const query = "what's your Andrew ID?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+            "hakaabi"
+          ));
+    });
+    test('should return my name', () => {
+        const query = "what's your name?";
+        const response: string = QueryProcessor(query);
+        expect(response).toBe((
+            "hakaabi"
+          ));
+    });
 });
+
