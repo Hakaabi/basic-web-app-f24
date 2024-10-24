@@ -106,7 +106,29 @@ if (query.toLocaleLowerCase().includes("to the power of")) {
       throw new Error('Failed to extract base and exponent from the query.');
   }
 }
+if (query.toLocaleLowerCase().includes("plus") || query.toLocaleLowerCase().includes("multiplied")) {
+  // Extract numbers and operations
+  const numbers = query.match(/\d+/g)?.map(Number);
+  const operators = query.match(/plus|multiplied/g);
 
+  if (numbers && operators && numbers.length === operators.length + 1) {
+      // Initialize the result with the first number
+      let result = numbers[0];
+
+      // Loop through the operators and apply the corresponding operations
+      for (let i = 0; i < operators.length; i++) {
+          if (operators[i] === "plus") {
+              result += numbers[i + 1]; // Add the next number
+          } else if (operators[i] === "multiplied") {
+              result *= numbers[i + 1]; // Multiply by the next number
+          }
+      }
+
+      return result.toString(); // Convert the result to a string and return it
+  } else {
+      throw new Error('Failed to extract numbers and operators from the query.');
+  }
+}
 
   return "";
 }

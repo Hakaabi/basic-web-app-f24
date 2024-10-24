@@ -174,6 +174,36 @@ describe("QueryProcessor", () => {
             throw new Error('Failed to extract base and exponent from the query.');
         }
     });
-            
+    test('should answer the expression involving addition and multiplication from the query', () => {
+        const query = "What is 75 plus 88 multiplied by 6?";
+    
+        // Extract numbers and operators
+        const numbers = query.match(/\d+/g)?.map(Number);
+        const operators = query.match(/plus|multiplied/g);
+    
+        if (numbers && operators && numbers.length === operators.length + 1) {
+            // Initialize the result with the first number
+            let result = numbers[0];
+    
+            // Loop through the operators and apply the corresponding operations
+            for (let i = 0; i < operators.length; i++) {
+                if (operators[i] === "plus") {
+                    result += numbers[i + 1]; // Add the next number
+                } else if (operators[i] === "multiplied") {
+                    result *= numbers[i + 1]; // Multiply by the next number
+                }
+            }
+    
+            const expectedResult = result; // The expected result calculated above
+    
+            const response: string = QueryProcessor(query); // Call your function
+    
+            // Compare the response to the expected result
+            expect(response).toBe(expectedResult.toString());
+        } else {
+            throw new Error('Failed to extract numbers and operators from the query.');
+        }
+    });
+             
 });
 
